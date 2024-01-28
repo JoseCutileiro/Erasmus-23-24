@@ -1,0 +1,14 @@
+C:\Users\35196\OneDrive\Ambiente de Trabalho\IntelAgents\PRATICAS\SOLUCOES_SLIDES\Tutorials\TutorialsSolution\Tutorial2Solution\bin\Debug\Tutorial2Solution.exe.config
+C:\Users\35196\OneDrive\Ambiente de Trabalho\IntelAgents\PRATICAS\SOLUCOES_SLIDES\Tutorials\TutorialsSolution\Tutorial2Solution\bin\Debug\Tutorial2Solution.exe
+C:\Users\35196\OneDrive\Ambiente de Trabalho\IntelAgents\PRATICAS\SOLUCOES_SLIDES\Tutorials\TutorialsSolution\Tutorial2Solution\bin\Debug\Tutorial2Solution.pdb
+C:\Users\35196\OneDrive\Ambiente de Trabalho\IntelAgents\PRATICAS\SOLUCOES_SLIDES\Tutorials\TutorialsSolution\Tutorial2Solution\bin\Debug\GeographyLibrary.dll
+C:\Users\35196\OneDrive\Ambiente de Trabalho\IntelAgents\PRATICAS\SOLUCOES_SLIDES\Tutorials\TutorialsSolution\Tutorial2Solution\bin\Debug\GeographyLibrary.pdb
+C:\Users\35196\OneDrive\Ambiente de Trabalho\IntelAgents\PRATICAS\SOLUCOES_SLIDES\Tutorials\TutorialsSolution\Tutorial2Solution\obj\Debug\Tutorial2Solution.csproj.AssemblyReference.cache
+C:\Users\35196\OneDrive\Ambiente de Trabalho\IntelAgents\PRATICAS\SOLUCOES_SLIDES\Tutorials\TutorialsSolution\Tutorial2Solution\obj\Debug\Tutorial2Solution.csproj.SuggestedBindingRedirects.cache
+C:\Users\35196\OneDrive\Ambiente de Trabalho\IntelAgents\PRATICAS\SOLUCOES_SLIDES\Tutorials\TutorialsSolution\Tutorial2Solution\obj\Debug\Tutorial2Solution.Form1.resources
+C:\Users\35196\OneDrive\Ambiente de Trabalho\IntelAgents\PRATICAS\SOLUCOES_SLIDES\Tutorials\TutorialsSolution\Tutorial2Solution\obj\Debug\Tutorial2Solution.Properties.Resources.resources
+C:\Users\35196\OneDrive\Ambiente de Trabalho\IntelAgents\PRATICAS\SOLUCOES_SLIDES\Tutorials\TutorialsSolution\Tutorial2Solution\obj\Debug\Tutorial2Solution.csproj.GenerateResource.cache
+C:\Users\35196\OneDrive\Ambiente de Trabalho\IntelAgents\PRATICAS\SOLUCOES_SLIDES\Tutorials\TutorialsSolution\Tutorial2Solution\obj\Debug\Tutorial2Solution.csproj.CoreCompileInputs.cache
+C:\Users\35196\OneDrive\Ambiente de Trabalho\IntelAgents\PRATICAS\SOLUCOES_SLIDES\Tutorials\TutorialsSolution\Tutorial2Solution\obj\Debug\Tutorial2Solution.csproj.CopyComplete
+C:\Users\35196\OneDrive\Ambiente de Trabalho\IntelAgents\PRATICAS\SOLUCOES_SLIDES\Tutorials\TutorialsSolution\Tutorial2Solution\obj\Debug\Tutorial2Solution.exe
+C:\Users\35196\OneDrive\Ambiente de Trabalho\IntelAgents\PRATICAS\SOLUCOES_SLIDES\Tutorials\TutorialsSolution\Tutorial2Solution\obj\Debug\Tutorial2Solution.pdb
