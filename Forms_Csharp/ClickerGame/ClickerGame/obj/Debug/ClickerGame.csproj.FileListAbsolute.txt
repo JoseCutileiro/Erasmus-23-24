@@ -1,0 +1,11 @@
+C:\Users\35196\OneDrive\Ambiente de Trabalho\Erasmus-23-24\Forms_Csharp\ClickerGame\ClickerGame\bin\Debug\ClickerGame.exe.config
+C:\Users\35196\OneDrive\Ambiente de Trabalho\Erasmus-23-24\Forms_Csharp\ClickerGame\ClickerGame\bin\Debug\ClickerGame.exe
+C:\Users\35196\OneDrive\Ambiente de Trabalho\Erasmus-23-24\Forms_Csharp\ClickerGame\ClickerGame\bin\Debug\ClickerGame.pdb
+C:\Users\35196\OneDrive\Ambiente de Trabalho\Erasmus-23-24\Forms_Csharp\ClickerGame\ClickerGame\obj\Debug\ClickerGame.csproj.AssemblyReference.cache
+C:\Users\35196\OneDrive\Ambiente de Trabalho\Erasmus-23-24\Forms_Csharp\ClickerGame\ClickerGame\obj\Debug\ClickerGame.csproj.SuggestedBindingRedirects.cache
+C:\Users\35196\OneDrive\Ambiente de Trabalho\Erasmus-23-24\Forms_Csharp\ClickerGame\ClickerGame\obj\Debug\ClickerGame.Game.resources
+C:\Users\35196\OneDrive\Ambiente de Trabalho\Erasmus-23-24\Forms_Csharp\ClickerGame\ClickerGame\obj\Debug\ClickerGame.Properties.Resources.resources
+C:\Users\35196\OneDrive\Ambiente de Trabalho\Erasmus-23-24\Forms_Csharp\ClickerGame\ClickerGame\obj\Debug\ClickerGame.csproj.GenerateResource.cache
+C:\Users\35196\OneDrive\Ambiente de Trabalho\Erasmus-23-24\Forms_Csharp\ClickerGame\ClickerGame\obj\Debug\ClickerGame.csproj.CoreCompileInputs.cache
+C:\Users\35196\OneDrive\Ambiente de Trabalho\Erasmus-23-24\Forms_Csharp\ClickerGame\ClickerGame\obj\Debug\ClickerGame.exe
+C:\Users\35196\OneDrive\Ambiente de Trabalho\Erasmus-23-24\Forms_Csharp\ClickerGame\ClickerGame\obj\Debug\ClickerGame.pdb
