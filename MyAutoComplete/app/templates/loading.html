@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Input Page</title>
+    <style>
+        /* Dark theme */
+        body {
+            background-color: #333;
+            color: #fff;
+            font-family: Arial, sans-serif;
+        }
+
+        form {
+            background-color: #444;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+        }
+
+        input[type="text"], input[type="submit"] {
+            background-color: #555;
+            border: none;
+            padding: 10px;
+            margin: 5px 0;
+            border-radius: 5px;
+            color: #fff;
+            transition: all 0.3s ease;
+        }
+
+        input[type="submit"]:hover {
+            transform: scale(1.1);
+            background-color: #666;
+        }
+
+        /* Style for the progress bar */
+        .progress-bar {
+            width: 30%;
+            height: 10px; /* Reduced height */
+            background-color: #ddd;
+            position: relative;
+            margin-bottom: 20px; /* Added space below the progress bar */
+            display: none;
+        }
+
+        .progress {
+            width: 0%;
+            height: 100%;
+            background-color: green;
+            position: absolute;
+            top: 0;
+            left: 0;
+            animation: progressAnimation 3s infinite;
+        }
+
+        /* Animation for the progress bar */
+        @keyframes progressAnimation {
+            0% { width: 0%; }
+            100% { width: 100%; }
+        }
+
+        /* Additional content styling */
+        h1, h2 {
+            margin-top: 20px;
+        }
+
+        p {
+            margin-top: 20px;
+            color: rgba(255, 255, 255, 0.8); /* Slightly less white */
+            font-size: 18px;
+        }
+
+        h2:last-of-type, p:last-of-type {
+            margin-bottom: 20px;
+        }
+    </style>
+    <script>
+        // Function to show loading progress bar
+        function showProgressBar() {
+            document.getElementById("progress").style.display = "block";
+        }
+    </script>
+</head>
+<body>
+    <h1>Welcome to the GitHub Code Scanner</h1>
+    <h2>How does this work?</h2>
+    <p>Enter the username and file extensions you are looking for, and it's done.</p>
+    <h2>Are there any limitations?</h2>
+    <p>On the beta release, you can only scan 5000 files per hour.</p>
+    <h2>Enter your username and extension:</h2>
+    <form action="/result" method="GET" onsubmit="showProgressBar()">
+        <label for="username">Username:</label>
+        <input type="text" id="username" name="username"><br><br>
+        <label for="extension">Extension:</label>
+        <input type="text" id="extension" name="extension"><br><br>
+        <input type="submit" value="Download">
+    </form>
+
+    <!-- Progress bar -->
+    <div id="progress" class="progress-bar">
+        <div class="progress"></div>
+    </div>
+
+    <h2>Made with ❤️ by @JoseCutileiro</h2>
+</body>
+</html>
