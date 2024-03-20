@@ -202,3 +202,108 @@ result = product <list>
 1. basic examples with tuple: see '7.tupleBasic'
 
 ## Functions
+
+1. See basic examples in "8.functions"
+2. Declare a function: funcName :: arg1_type -> ... -> argn_type -> ret_type
+3. make a function: funcName arg1 arg2 = operation (returned value)
+4. Recursion example with haskell in "9.recursion"
+
+## Guards
+
+Instead of using if statements you can use guards  (very usefull) -> check example in "10.Guards"
+
+This can be combine with the where clause, very usefull, you can see some example in "11.Where"
+
+## Get list of items
+
+See 12.ListItems to get more information 
+
+## Higher order functions
+
+You can see example in 13.HigherOrderFunctions
+
+1. Map -> Aplicar uma função a todos os elementos da lista
+
+```
+result = map <func> <list>
+```
+
+## Functions inside functions
+
+This is a bit weird and can make your code very confuse
+so try to avoid this to be honest, but you can see example in 14.FunctionInsideFunctions
+
+You can also return a function (see in the same example). Have the same problem of being confuse ...
+
+## Labdas (anonymous functions)
+
+This was very fast so is on 14.FunctionInsideFunctions too
+
+## Other types
+
+1. Enumerator types
+2. Custom types
+3. In custom types you can make complex types like
+
+```
+(remember this use uppercase)
+(to see other example see 16.CustomTypes)
+
+data Shape = Circle Float Float Float | Rectangle Float Float Float Float
+    deriving Show
+
+area :: Shape -> Float
+
+area (Circle _ _ r) = pi * r ** 2
+area (Rectangle x1 y1 x2 y2) = (abs (x2 - x1)) * (abs (y2 - y1))
+```
+
+## Type classes
+
+This are the type classes: Num Eq Or Show
+
+(generic classes)
+
+Example: 
+```hs
+data Employee = Employee { name :: String,
+                           position :: String,
+                           idNum :: Int
+                        } deriving (Eq, Show)
+```
+
+Here we are saying that we can see the string format of this, and we can also see if two of this intances are equal, this creae a default way of showing and seeing equality. But we can also define a custom
+
+```hs
+
+data ShirtSize S | M | L
+
+instance Eq ShirtSize where
+    S == S = True
+    M == M = True
+    L == L = True
+    _ == _ = False
+
+instance Show ShirtSize where
+    show S = "Small"
+    show M = "Medium"
+    show L = "Large"
+
+-- S in list
+smallAvail = elem S [S, M, L]
+```
+
+## File IO
+
+```
+writeToFile = do 
+    theFile <- openFile "file.txt" WriteMode
+    hPutStrLn theFile ("Random text")
+    hClose theFile
+
+readFromFile = do 
+    theFile <- openFile "file.txt" ReadMode
+    content <- hGetContents theFile2
+    putStr contents
+    hClose theFile
+```
