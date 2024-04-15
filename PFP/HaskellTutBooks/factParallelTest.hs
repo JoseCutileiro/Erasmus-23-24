@@ -25,5 +25,5 @@ main = do
     let nums = take 8000000 $ randomRs (1, 9) gen :: [Int]
     putStrLn "Sequential Sum:"
     print $ sumFactListSeq nums
-    --putStrLn "Parallel Sum:"
-    --print $ sumFactListParallel nums
+    putStrLn "Parallel Sum:"
+    print $ sumFactListParallel nums
