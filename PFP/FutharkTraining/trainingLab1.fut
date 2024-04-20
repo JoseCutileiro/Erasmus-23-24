@@ -16,3 +16,8 @@ def mx (m1:i32,i1:i64) (m2:i32,i2:i64) : (i32,i64) =
 -- max index (in the documentation)
 def maxidx [n] (xs: [n]i32) : (i32,i64) =
   reduce mx (i32.lowest,-1) (zip xs (iota n))
+
+-- explaining iota 
+-- iota 6 <=> [0,1,2,3,4,5]
+def getIndexes (x : i64) : []i64 =
+  iota x
