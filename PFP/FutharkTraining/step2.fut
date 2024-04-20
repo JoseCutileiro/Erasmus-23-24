@@ -14,3 +14,7 @@ def average (xs: []f32) : f32 =
 
 def testing_scan (xs: []i32) : []i32 =
     scan (+) 0 xs
+
+
+
+-- PROXIMO -> gather and scatter
