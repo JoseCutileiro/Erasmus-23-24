@@ -87,3 +87,42 @@ psort3(D,[X|Xs]) ->
     psort3(D-1,[Y || Y <- Xs, Y < X]) ++
         [X] ++
         receive {Ref,Greater} -> Greater end.
+
+% An improved version
+% Each process collects its own heap
+% messages have to be copied
+
+psort4(Xs) -> psort3(Xs).
+
+psort4(0,Xs) -> psort3(0,Xs);
+
+psort4(_,[]) -> [];
+
+psort4(D, [X|Xs]) -> 
+    Parent = self(), 
+    Ref = make_ref(),
+    Grtr = [Y || Y <- Xs, Y >= X], 
+    spawn_link(fun() -> 
+        Parent ! {Ref,psort4(D-1, Grtr)}
+        end),
+    psort4(D-1,[Y || Y <- Xs, Y < X]) ++
+        [X] ++
+        receive {Ref,Greater} -> Greater end.
+
+% Reduce copying -> accumulating parameter
+
+asort(L) -> asort(L, []).
+
+asort([], Acc) -> Acc;
+asort([X| Xs], Acc) -> 
+    asort([Y || Y <- Xs, Y < X],
+    [X | asort([Y || Y <- Xs, Y >= X], Acc)]).
+
+% Conclusions:
+
+% Erlang is more explicit than haskell
+% Process do not share memory 
+% All communication must be explicit by message
+% Performance and scalability are strong points 
+% Distribution is easy => dwsort <- sort with multiple machines
+
