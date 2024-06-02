@@ -1,0 +1,65 @@
+# @author: Jose Cutileiro
+# @group: G70
+# Date: 15/05/2024
+
+# 1: Find the name, director and department of all programmes.
+
+MATCH (programme:Programme)-[:programmeDept]->(department)
+MATCH (director:Senior_Teacher)-[:oversees]->(programme)
+RETURN programme.programmeName, department.deptName, director.teacherId AS director_id;
+
+# 2: Find the names of all students who worked as teaching assistants in courses given by the D3-2 division in study period 2 in academic year 2023/2024.
+
+MATCH (ta:Teacher)
+MATCH (ta:Student)
+MATCH (ci:Course_Instance)
+MATCH (ta)-[:worksIn]->(ci)
+MATCH (course:Course)
+MATCH (course)-[:hasExecution]->(ci)
+MATCH (course)-[:courseDivision]->(division)
+WHERE (ci.studyPeriod = "2.0")
+AND (ci.academicYearCourse = "2023-2024")
+AND (division.divisionName = "D3-2")
+RETURN ta.teacherName, ci.academicYearCourse, ci.studyPeriod;
+
+# 3: Find all teachers who are assigned more than 120 hours in course 1015 in study period 1 in academic year 2018/2019.
+
+MATCH (hours:Hour_Information)
+MATCH (teacher:Teacher)
+MATCH (course:Course)
+MATCH (course)-[:hasExecution]->(ci:Course_Instance)
+MATCH (hours)-[:associatedWith]->(teacher)
+MATCH (hours)-[:given]->(ci)
+WHERE (hours.assignedHours > "120")
+AND (course.courseCode = "1015")
+AND (ci.studyPeriod = "1.0")
+AND (ci.academicYearCourse = "2018-2019")
+RETURN teacher.teacherName,teacher.teacherId;
+
+# 4: Find all students registered for course instance I-910 that were not registered for course instance I-911.
+
+MATCH (student:Student)
+MATCH (ci:Course_Instance)
+MATCH (student)-[:register]-(regis:Registration)
+MATCH(ci)-[:hasRegistration]-(regis:Registration)
+WHERE (ci.instanceId = "I-910")
+RETURN student.studentId,student.studentName,student.graduated;
+
+# 5: Find all programmes along with the total number of owned courses. List the results in descending order of number of owned courses.
+
+MATCH (programme:Programme)-[:owns]->(course:Course)
+RETURN programme.programmeCode AS code, programme.programmeName AS name, COUNT(course) AS courseCount
+ORDER BY courseCount DESC;
+
+# 6: [PART 1] Find the number of: senior_teachers
+
+MATCH (senior_teacher:Senior_Teacher)
+RETURN COUNT(senior_teacher) AS count;
+
+# 6: [PART 2] Find the number of: everyone
+
+MATCH (senior_teacher:Senior_Teacher)
+WITH COUNT(senior_teacher) AS senior_teacher_count
+MATCH (student:Student)
+WITH senior_teacher_count, COUNT(student) AS student_count
+RETURN (senior_teacher_count + student_count) AS total_count;

@@ -1,0 +1,129 @@
+# @author: Jose Cutileiro
+# @group: G70
+# Date: 05/05/2024
+
+# 1: Find the name, director and department of all programmes.
+
+PREFIX : <http://www.semanticweb.org/35196/ontologies/2024/3/assignment2/>
+PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+select ?name ?department_name ?director_id where {
+    ?programme rdf:type :Programme .
+    ?director rdf:type :Senior_Teacher .
+    ?programme :programmeName ?name .
+    ?programme :programmeDept ?department .
+    ?director :oversees ?programme .
+    
+    ?department :deptName ?department_name .
+    ?director :teacherId ?director_id .
+}
+
+# 2: Find the names of all students who worked as teaching assistants in courses given by the D3-2 division in study period 2 in academic year 2023/2024.
+
+PREFIX : <http://www.semanticweb.org/35196/ontologies/2024/3/assignment2/>
+PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+select ?name ?academicYear ?studyPeriod ?divisionName where {
+    ?TA rdf:type :Teacher . 
+    ?TA rdf:type :Student .
+    ?TA :worksIn ?CI .
+    
+    ?course rdf:type :Course .
+    ?course :hasExecution ?CI .
+    ?course :courseDivision ?division .
+    
+    ?CI :academicYearCourse ?academicYear .
+    ?CI :studyPeriod ?studyPeriod .
+    
+    ?division :divisionName ?divisionName .
+    
+    FILTER(?studyPeriod = "2.0") .
+    FILTER(?academicYear = "2023-2024") .
+    FILTER(?divisionName = "D3-2") .
+    
+    ?TA :teacherName ?name .
+}
+
+# 3: Find all teachers who are assigned more than 120 hours in course 1015 in study period 1 in academic year 2018/2019.
+
+PREFIX : <http://www.semanticweb.org/35196/ontologies/2024/3/assignment2/>
+PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+select ?name ?id ?assignedHours ?courseCode ?studyPeriod ?academicYear where {
+    ?hours rdf:type :Hour_Information .
+    ?teacher rdf:type :Teacher . 
+    ?CI rdf:type :Course_Instance .
+    ?course rdf:type :Course .
+    
+    ?hours :associatedWith ?teacher .
+    ?hours :assignedHours ?assignedHours .
+    ?hours :given ?CI .
+    ?course :hasExecution ?CI .
+    ?course :courseCode ?courseCode .
+    ?CI :studyPeriod ?studyPeriod .
+    ?CI :academicYearCourse ?academicYear .
+    
+    FILTER(?assignedHours > "120") .
+    FILTER(?courseCode = "1015") .
+    FILTER(?studyPeriod = "1.0") .
+    FILTER(?academicYear = "2018-2019") .
+    
+    ?teacher :teacherName ?name .
+    ?teacher :teacherId ?id . 
+}
+
+# 4: Find all students registered for course instance I-910 that were not registered for course instance I-911.
+
+PREFIX : <http://www.semanticweb.org/35196/ontologies/2024/3/assignment2/>
+PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+select ?id ?name ?graduated where {
+	?student rdf:type :Student .
+	?ci rdf:type :Course_Instance .
+	?student :register ?regis .
+	?ci :hasRegistration ?regis .
+	
+    ?ci :instanceId "I-910" .
+    
+    FILTER NOT EXISTS {
+        ?ci :instanceId "I-911" .
+    }
+    
+    ?student :studentId ?id .
+    ?student :studentName ?name .
+    ?student :graduated ?graduated .
+}
+
+# 5: Find all programmes along with the total number of owned courses. List the results in descending order of number of owned courses.
+
+PREFIX : <http://www.semanticweb.org/35196/ontologies/2024/3/assignment2/>
+PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+SELECT ?code ?name (COUNT(?course) AS ?courseCount) WHERE {
+    ?programme rdf:type :Programme .
+    ?programme :programmeCode ?code .
+    ?programme :programmeName ?name .
+    ?programme :owns ?course .
+} GROUP BY ?code ?name
+ORDER BY DESC(?courseCount)
+
+# 6: [PART 1] Find the number of: senior_teachers
+
+PREFIX : <http://www.semanticweb.org/35196/ontologies/2024/3/assignment2/>
+PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+SELECT (COUNT(?senior_teachers) AS ?count) WHERE {
+    ?senior_teachers rdf:type :Senior_Teacher
+} 
+
+# 6: [PART 2] Find the number of: everyone
+
+PREFIX : <http://www.semanticweb.org/35196/ontologies/2024/3/assignment2/>
+PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+
+SELECT (?senior_teacher_count + ?student_count AS ?total_count) WHERE {
+    {
+        SELECT (COUNT(?senior_teacher) AS ?senior_teacher_count) WHERE {
+            ?senior_teacher rdf:type :Senior_Teacher .
+        }
+    }
+    {
+        SELECT (COUNT(?student) AS ?student_count) WHERE {
+            ?student rdf:type :Student .
+        }
+    }
+}

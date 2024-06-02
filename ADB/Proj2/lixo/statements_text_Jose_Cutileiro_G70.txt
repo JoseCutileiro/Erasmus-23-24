@@ -1,0 +1,368 @@
+@prefix : <http://www.semanticweb.org/35196/ontologies/2024/3/assignment2/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix xml: <http://www.w3.org/XML/1998/namespace> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@base <http://www.semanticweb.org/35196/ontologies/2024/3/assignment2/> .
+
+<http://www.semanticweb.org/35196/ontologies/2024/3/assignment2> rdf:type owl:Ontology .
+
+#################################################################
+#    Datatypes
+#################################################################
+
+###  http://www.w3.org/2001/XMLSchema#integer
+xsd:integer owl:equivalentClass xsd:string .
+
+
+#################################################################
+#    Object Properties
+#################################################################
+
+###  http://www.semanticweb.org/35196/ontologies/2024/3/assignment2/actionsOfPeople
+:actionsOfPeople rdf:type owl:ObjectProperty .
+
+
+###  http://www.semanticweb.org/35196/ontologies/2024/3/assignment2/associatedWith
+:associatedWith rdf:type owl:ObjectProperty ;
+                rdfs:subPropertyOf :peopleAssociation ;
+                rdfs:domain :Hour_Information ;
+                rdfs:range :Teacher .
+
+
+###  http://www.semanticweb.org/35196/ontologies/2024/3/assignment2/belongsTo
+:belongsTo rdf:type owl:ObjectProperty ;
+           rdfs:subPropertyOf :courseDescription ;
+           rdfs:domain :Programme_Course ;
+           rdfs:range :Programme .
+
+
+###  http://www.semanticweb.org/35196/ontologies/2024/3/assignment2/courseDescription
+:courseDescription rdf:type owl:ObjectProperty .
+
+
+###  http://www.semanticweb.org/35196/ontologies/2024/3/assignment2/enrolls
+:enrolls rdf:type owl:ObjectProperty ;
+         rdfs:subPropertyOf :actionsOfPeople ;
+         rdfs:domain :Student ;
+         rdfs:range :Programme_Course .
+
+
+###  http://www.semanticweb.org/35196/ontologies/2024/3/assignment2/examine
+:examine rdf:type owl:ObjectProperty ;
+         rdfs:subPropertyOf :actionsOfPeople ;
+         rdfs:domain :Senior_Teacher ;
+         rdfs:range :Course_Instance .
+
+
+###  http://www.semanticweb.org/35196/ontologies/2024/3/assignment2/given
+:given rdf:type owl:ObjectProperty ;
+       rdfs:subPropertyOf :courseDescription ;
+       rdfs:domain :Hour_Information ;
+       rdfs:range :Course_Instance .
+
+
+###  http://www.semanticweb.org/35196/ontologies/2024/3/assignment2/hasExecution
+:hasExecution rdf:type owl:ObjectProperty ;
+              rdfs:subPropertyOf :courseDescription ;
+              rdfs:domain :Course ;
+              rdfs:range :Course_Instance .
+
+
+###  http://www.semanticweb.org/35196/ontologies/2024/3/assignment2/hasRegistration
+:hasRegistration rdf:type owl:ObjectProperty ;
+                 rdfs:subPropertyOf :peopleAssociation ;
+                 rdfs:domain :Course_Instance ;
+                 rdfs:range :Registration .
+
+
+###  http://www.semanticweb.org/35196/ontologies/2024/3/assignment2/includedIn
+:includedIn rdf:type owl:ObjectProperty ;
+            rdfs:subPropertyOf :courseDescription ;
+            rdfs:domain :Programme_Course ;
+            rdfs:range :Course .
+
+
+###  http://www.semanticweb.org/35196/ontologies/2024/3/assignment2/oversees
+:oversees rdf:type owl:ObjectProperty ;
+          rdfs:subPropertyOf :actionsOfPeople ;
+          rdfs:domain :Senior_Teacher ;
+          rdfs:range :Programme .
+
+
+###  http://www.semanticweb.org/35196/ontologies/2024/3/assignment2/owns
+:owns rdf:type owl:ObjectProperty ;
+      rdfs:subPropertyOf :courseDescription ;
+      rdfs:domain :Programme ;
+      rdfs:range :Course .
+
+
+###  http://www.semanticweb.org/35196/ontologies/2024/3/assignment2/peopleAssociation
+:peopleAssociation rdf:type owl:ObjectProperty .
+
+
+###  http://www.semanticweb.org/35196/ontologies/2024/3/assignment2/register
+:register rdf:type owl:ObjectProperty ;
+          rdfs:subPropertyOf :actionsOfPeople ;
+          rdfs:domain :Student ;
+          rdfs:range :Registration .
+
+
+###  http://www.semanticweb.org/35196/ontologies/2024/3/assignment2/worksIn
+:worksIn rdf:type owl:ObjectProperty ;
+         rdfs:subPropertyOf :actionsOfPeople ;
+         rdfs:domain :Teacher ;
+         rdfs:range :Course_Instance .
+
+
+#################################################################
+#    Data properties
+#################################################################
+
+###  http://www.semanticweb.org/35196/ontologies/2024/3/assignment2/CourseAtributes
+:CourseAtributes rdf:type owl:DatatypeProperty .
+
+
+###  http://www.semanticweb.org/35196/ontologies/2024/3/assignment2/PersonAtributes
+:PersonAtributes rdf:type owl:DatatypeProperty .
+
+
+###  http://www.semanticweb.org/35196/ontologies/2024/3/assignment2/PersonInfoAtributes
+:PersonInfoAtributes rdf:type owl:DatatypeProperty .
+
+
+###  http://www.semanticweb.org/35196/ontologies/2024/3/assignment2/academicYear
+:academicYear rdf:type owl:DatatypeProperty ;
+              rdfs:subPropertyOf :CourseAtributes ;
+              rdfs:domain :Course_Instance ,
+                          :Programme_Course ;
+              rdfs:range xsd:int .
+
+
+###  http://www.semanticweb.org/35196/ontologies/2024/3/assignment2/assignedHours
+:assignedHours rdf:type owl:DatatypeProperty ;
+               rdfs:subPropertyOf :PersonInfoAtributes ;
+               rdfs:domain :Hour_Information ;
+               rdfs:range xsd:int .
+
+
+###  http://www.semanticweb.org/35196/ontologies/2024/3/assignment2/assistantHours
+:assistantHours rdf:type owl:DatatypeProperty ;
+                rdfs:subPropertyOf :CourseAtributes ;
+                rdfs:domain :Course_Instance ;
+                rdfs:range xsd:int .
+
+
+###  http://www.semanticweb.org/35196/ontologies/2024/3/assignment2/courseCode
+:courseCode rdf:type owl:DatatypeProperty ;
+            rdfs:subPropertyOf :CourseAtributes ;
+            rdfs:domain :Course ;
+            rdfs:range xsd:int .
+
+
+###  http://www.semanticweb.org/35196/ontologies/2024/3/assignment2/courseName
+:courseName rdf:type owl:DatatypeProperty ;
+            rdfs:subPropertyOf :CourseAtributes ;
+            rdfs:domain :Course ;
+            rdfs:range xsd:string .
+
+
+###  http://www.semanticweb.org/35196/ontologies/2024/3/assignment2/courseType
+:courseType rdf:type owl:DatatypeProperty ;
+            rdfs:subPropertyOf :CourseAtributes ;
+            rdfs:domain :Programme_Course ;
+            rdfs:range xsd:string .
+
+
+###  http://www.semanticweb.org/35196/ontologies/2024/3/assignment2/credits
+:credits rdf:type owl:DatatypeProperty ;
+         rdfs:subPropertyOf :CourseAtributes ;
+         rdfs:domain :Course ;
+         rdfs:range xsd:float .
+
+
+###  http://www.semanticweb.org/35196/ontologies/2024/3/assignment2/dept
+:dept rdf:type owl:DatatypeProperty ;
+      rdfs:subPropertyOf owl:topDataProperty ;
+      rdfs:domain :Course ,
+                  :Programme ,
+                  :Teacher ;
+      rdfs:range xsd:string .
+
+
+###  http://www.semanticweb.org/35196/ontologies/2024/3/assignment2/division
+:division rdf:type owl:DatatypeProperty ;
+          rdfs:subPropertyOf owl:topDataProperty ;
+          rdfs:domain :Course ,
+                      :Teacher ;
+          rdfs:range xsd:string .
+
+
+###  http://www.semanticweb.org/35196/ontologies/2024/3/assignment2/grade
+:grade rdf:type owl:DatatypeProperty ;
+       rdfs:subPropertyOf :PersonInfoAtributes ;
+       rdfs:domain :Registration ;
+       rdfs:range xsd:float .
+
+
+###  http://www.semanticweb.org/35196/ontologies/2024/3/assignment2/graduated
+:graduated rdf:type owl:DatatypeProperty ;
+           rdfs:subPropertyOf :PersonAtributes ;
+           rdfs:domain :Student ;
+           rdfs:range xsd:boolean .
+
+
+###  http://www.semanticweb.org/35196/ontologies/2024/3/assignment2/instanceId
+:instanceId rdf:type owl:DatatypeProperty ;
+            rdfs:subPropertyOf :CourseAtributes ;
+            rdfs:domain :Course_Instance ;
+            rdfs:range xsd:int .
+
+
+###  http://www.semanticweb.org/35196/ontologies/2024/3/assignment2/level
+:level rdf:type owl:DatatypeProperty ;
+       rdfs:subPropertyOf :CourseAtributes ;
+       rdfs:domain :Course ;
+       rdfs:range xsd:string .
+
+
+###  http://www.semanticweb.org/35196/ontologies/2024/3/assignment2/name
+:name rdf:type owl:DatatypeProperty ;
+      rdfs:subPropertyOf :PersonAtributes ;
+      rdfs:domain :Person ;
+      rdfs:range xsd:string .
+
+
+###  http://www.semanticweb.org/35196/ontologies/2024/3/assignment2/planningNumStudents
+:planningNumStudents rdf:type owl:DatatypeProperty ;
+                     rdfs:subPropertyOf :CourseAtributes ;
+                     rdfs:domain :Course_Instance ;
+                     rdfs:range xsd:int .
+
+
+###  http://www.semanticweb.org/35196/ontologies/2024/3/assignment2/programmeCode
+:programmeCode rdf:type owl:DatatypeProperty ;
+               rdfs:subPropertyOf :CourseAtributes ;
+               rdfs:domain :Programme ;
+               rdfs:range xsd:int .
+
+
+###  http://www.semanticweb.org/35196/ontologies/2024/3/assignment2/programmeName
+:programmeName rdf:type owl:DatatypeProperty ;
+               rdfs:subPropertyOf :CourseAtributes ;
+               rdfs:domain :Programme ;
+               rdfs:range xsd:string .
+
+
+###  http://www.semanticweb.org/35196/ontologies/2024/3/assignment2/reportedHours
+:reportedHours rdf:type owl:DatatypeProperty ;
+               rdfs:subPropertyOf :PersonInfoAtributes ;
+               rdfs:domain :Hour_Information ;
+               rdfs:range xsd:int .
+
+
+###  http://www.semanticweb.org/35196/ontologies/2024/3/assignment2/seniorHours
+:seniorHours rdf:type owl:DatatypeProperty ;
+             rdfs:subPropertyOf :CourseAtributes ;
+             rdfs:domain :Course_Instance ;
+             rdfs:range xsd:int .
+
+
+###  http://www.semanticweb.org/35196/ontologies/2024/3/assignment2/status
+:status rdf:type owl:DatatypeProperty ;
+        rdfs:subPropertyOf :PersonInfoAtributes ;
+        rdfs:domain :Registration ;
+        rdfs:range xsd:string .
+
+
+###  http://www.semanticweb.org/35196/ontologies/2024/3/assignment2/studentId
+:studentId rdf:type owl:DatatypeProperty ;
+           rdfs:subPropertyOf :PersonAtributes ;
+           rdfs:domain :Student ;
+           rdfs:range xsd:string .
+
+
+###  http://www.semanticweb.org/35196/ontologies/2024/3/assignment2/studyPeriod
+:studyPeriod rdf:type owl:DatatypeProperty ;
+             rdfs:subPropertyOf :CourseAtributes ;
+             rdfs:domain :Course_Instance ;
+             rdfs:range xsd:int .
+
+
+###  http://www.semanticweb.org/35196/ontologies/2024/3/assignment2/studyYear
+:studyYear rdf:type owl:DatatypeProperty ;
+           rdfs:subPropertyOf :CourseAtributes ;
+           rdfs:domain :Programme_Course ;
+           rdfs:range xsd:int .
+
+
+###  http://www.semanticweb.org/35196/ontologies/2024/3/assignment2/teacherId
+:teacherId rdf:type owl:DatatypeProperty ;
+           rdfs:subPropertyOf :PersonAtributes ;
+           rdfs:domain :Teacher ;
+           rdfs:range xsd:string .
+
+
+#################################################################
+#    Classes
+#################################################################
+
+###  http://www.semanticweb.org/35196/ontologies/2024/3/assignment2/Course
+:Course rdf:type owl:Class ;
+        rdfs:subClassOf :Course_Information .
+
+
+###  http://www.semanticweb.org/35196/ontologies/2024/3/assignment2/Course_Information
+:Course_Information rdf:type owl:Class .
+
+
+###  http://www.semanticweb.org/35196/ontologies/2024/3/assignment2/Course_Instance
+:Course_Instance rdf:type owl:Class ;
+                 rdfs:subClassOf :Course_Information .
+
+
+###  http://www.semanticweb.org/35196/ontologies/2024/3/assignment2/Hour_Information
+:Hour_Information rdf:type owl:Class ;
+                  rdfs:subClassOf :Person_Information .
+
+
+###  http://www.semanticweb.org/35196/ontologies/2024/3/assignment2/Person
+:Person rdf:type owl:Class .
+
+
+###  http://www.semanticweb.org/35196/ontologies/2024/3/assignment2/Person_Information
+:Person_Information rdf:type owl:Class .
+
+
+###  http://www.semanticweb.org/35196/ontologies/2024/3/assignment2/Programme
+:Programme rdf:type owl:Class ;
+           rdfs:subClassOf :Course_Information .
+
+
+###  http://www.semanticweb.org/35196/ontologies/2024/3/assignment2/Programme_Course
+:Programme_Course rdf:type owl:Class ;
+                  rdfs:subClassOf :Course_Information .
+
+
+###  http://www.semanticweb.org/35196/ontologies/2024/3/assignment2/Registration
+:Registration rdf:type owl:Class ;
+              rdfs:subClassOf :Person_Information .
+
+
+###  http://www.semanticweb.org/35196/ontologies/2024/3/assignment2/Senior_Teacher
+:Senior_Teacher rdf:type owl:Class ;
+                rdfs:subClassOf :Teacher .
+
+
+###  http://www.semanticweb.org/35196/ontologies/2024/3/assignment2/Student
+:Student rdf:type owl:Class ;
+         rdfs:subClassOf :Person .
+
+
+###  http://www.semanticweb.org/35196/ontologies/2024/3/assignment2/Teacher
+:Teacher rdf:type owl:Class ;
+         rdfs:subClassOf :Person .
+
+
+###  Generated by the OWL API (version 4.5.26.2023-07-17T20:34:13Z) https://github.com/owlcs/owlapi

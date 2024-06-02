@@ -1,0 +1,89 @@
+MATCH (n)
+DETACH DELETE n;
+
+// LOAD STUDENTS
+LOAD CSV WITH HEADERS FROM 'https://raw.githubusercontent.com/JoseCutileiro/ImageLinks/master/ADB/Students.csv' AS st
+MERGE (s:Student {studentId: st.`Student id`})
+SET s.studentName = st.`Student name`, s.graduated = st.Graduated;
+
+// LOAD PROGRAMMES
+LOAD CSV WITH HEADERS FROM 'https://raw.githubusercontent.com/JoseCutileiro/ImageLinks/master/ADB/Programmes.csv' AS pg
+MERGE (p:Programme {programmeCode: pg.`Programme code`})
+SET p.programmeName = pg.`Programme name`;
+
+// LOAD COURSES
+LOAD CSV WITH HEADERS FROM 'https://raw.githubusercontent.com/JoseCutileiro/ImageLinks/master/ADB/Courses.csv' AS cs
+MERGE (c:Course {courseCode: cs.`Course code`})
+SET c.courseName = cs.`Course name`, c.credits = cs.`Credits`, c.level = cs.`Level`;
+
+// LOAD OWNED BY
+LOAD CSV WITH HEADERS FROM 'https://raw.githubusercontent.com/JoseCutileiro/ImageLinks/master/ADB/CoursesFix.csv' AS oby
+MERGE (p2:Programme {programmeCode: oby.`Owned By`})
+MERGE (c2:Course {courseCode: oby.`Course code`})
+MERGE (p2)-[:owns]->(c2);
+
+// LOAD TEACHERS (TA)
+LOAD CSV WITH HEADERS FROM 'https://raw.githubusercontent.com/JoseCutileiro/ImageLinks/master/ADB/Teaching_Assistants.csv' AS ta
+MERGE (t:Teacher {teacherId: ta.`Teacher id`})
+SET t.teacherName = ta.`Teacher name`;
+
+// LOAD TEACHERS (ST)
+LOAD CSV WITH HEADERS FROM 'https://raw.githubusercontent.com/JoseCutileiro/ImageLinks/master/ADB/Senior_Teachers.csv' AS ste
+MERGE (t2:Teacher {teacherId: ste.`Teacher id`})
+SET t2.teacherName = ste.`Teacher name`;
+
+// LOAD SENIOR TEACHERS 
+LOAD CSV WITH HEADERS FROM 'https://raw.githubusercontent.com/JoseCutileiro/ImageLinks/master/ADB/Senior_Teachers.csv' AS stec
+MERGE (stea:Senior_Teacher {teacherId: stec.`Teacher id`})
+SET stea.teacherName = stec.`Teacher name`;
+
+// LOAD COURSE INSTANCE
+LOAD CSV WITH HEADERS FROM 'https://raw.githubusercontent.com/JoseCutileiro/ImageLinks/master/ADB/Course_Instances.csv' AS cinstance
+MERGE (ci:Course_Instance {instanceId: cinstance.`Instance_id`})
+SET ci.academicYearCourse = cinstance.`Academic year`,ci.studyPeriod = cinstance.`Study period`;
+
+// LOAD COURSE INSTANCE (COUSE PLANNING)
+LOAD CSV WITH HEADERS FROM 'https://raw.githubusercontent.com/JoseCutileiro/ImageLinks/master/ADB/Course_plannings.csv' AS cinstanceP
+MERGE (cip:Course_Instance {instanceId: cinstanceP.`Course`})
+SET cip.assistanteeHours = cinstanceP.`Assistant Hours`, cip.seniorHours = cinstanceP.`Senior Hours`, cip.planningNumStudents = cinstanceP.`Planned number of Students`;
+
+// LOAD HAS EXECUTION
+LOAD CSV WITH HEADERS FROM 'https://raw.githubusercontent.com/JoseCutileiro/ImageLinks/master/ADB/Course_Instances.csv' AS hexec
+MERGE (iexec:Course_Instance {instanceId: hexec.`Instance_id`})
+MERGE (cexec:Course {courseCode: hexec.`Course code`})
+MERGE (cexec)-[:hasExecution]->(iexec);
+
+// LOAD OVERSEES
+LOAD CSV WITH HEADERS FROM 'https://raw.githubusercontent.com/JoseCutileiro/ImageLinks/master/ADB/Programmes.csv' AS overseesR
+MERGE (ovProgramme:Programme {programmeCode: overseesR.`Programme code`})
+MERGE (ovDirector:Teacher {teacherId: overseesR.`Director`})
+MERGE (ovDirector)-[:oversees]->(ovProgramme);
+
+// LOAD EXAMINE
+LOAD CSV WITH HEADERS FROM 'https://raw.githubusercontent.com/JoseCutileiro/ImageLinks/master/ADB/Course_Instances.csv' AS examinesR
+MERGE (exExaminer:Teacher {teacherId: examinesR.`Examiner`})
+MERGE (exCourse:Course_Instance {instanceId: examinesR.`Instance_id`})
+MERGE (exExaminer)-[:examine]->(exCourse);
+
+// LOAD PROGRAMME COURSE
+LOAD CSV WITH HEADERS FROM 'https://raw.githubusercontent.com/JoseCutileiro/ImageLinks/master/ADB/Programme_Courses.csv' AS pcourse
+MERGE (pcc:Programme_Course {key: pcourse.`Programme code` + pcourse.`Academic Year`})
+SET pcc.academicYearProgramme = pcourse.`Academic Year`, pcc.courseType = pcourse.`Course Type`, pcc.courseType = pcourse.`Course Type`,pcc.studyYear = pcourse.`Study Year`;
+
+// LOAD ENROLLS IN 
+LOAD CSV WITH HEADERS FROM 'https://raw.githubusercontent.com/JoseCutileiro/ImageLinks/master/ADB/StudentsFix.csv' AS stuFix
+MERGE (sid4:Student {studentId: stuFix.`Student id`})
+MERGE (pcours4:Programme_Course {key: stuFix.`Programme` + stuFix.`Year`})
+MERGE (sid4)-[:enrolls]->(pcours4);
+
+// LOAD BELONGS TO
+LOAD CSV WITH HEADERS FROM 'https://raw.githubusercontent.com/JoseCutileiro/ImageLinks/master/ADB/Programme_Courses.csv' AS belongsF
+MERGE (p4:Programme {programmeCode: belongsF.`Programme code`})
+MERGE (pc4:Programme_Course {key: belongsF.`Programme code` + belongsF.`Academic Year`})
+MERGE (pc4)-[:belongsTo]->(p4);
+
+// LOAD INCLUDED IN
+LOAD CSV WITH HEADERS FROM 'https://raw.githubusercontent.com/JoseCutileiro/ImageLinks/master/ADB/Programme_Courses.csv' AS belongsF2
+MERGE (c5:Course {courseCode: belongsF2.`Course`})
+MERGE (pc5:Programme_Course {key: belongsF2.`Programme code` + belongsF2.`Academic Year`})
+MERGE (c5)-[:includedIn]->(pc5);
